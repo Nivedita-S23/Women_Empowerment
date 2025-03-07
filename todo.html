@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pregnancy To-Do List</title>
+    <link rel="stylesheet" href="styletodo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pregnancy To-Do List</h1>
+
+        <form id="todoForm">
+            <input type="text" id="taskInput" placeholder="Add a new task" required>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="taskList">
+            <li draggable="true">
+                Take prenatal vitamins
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Drink 8 glasses of water daily
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Attend prenatal checkups
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Do light exercises (e.g., walking, yoga)
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Track baby's movements (in later trimesters)
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Prepare hospital bag
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Attend childbirth classes
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Eat a balanced diet (fruits, vegetables, proteins)
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Get enough rest and sleep
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+            <li draggable="true">
+                Avoid harmful substances (alcohol, smoking)
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            </li>
+        </ul>
+
+        <!-- Back to Dashboard -->
+        <a href="dashboard.php" class="back-link">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // JavaScript for To-Do List with drag-and-drop functionality
+        document.getElementById('todoForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            // Get the task input value
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                // Create a new list item
+                const taskItem = document.createElement('li');
+                taskItem.textContent = taskText;
+                taskItem.setAttribute('draggable', 'true'); // Make the task draggable
+
+                // Add a delete button to the task
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = function () {
+                    taskItem.remove(); // Remove the task when delete button is clicked
+                };
+
+                taskItem.appendChild(deleteButton);
+                document.getElementById('taskList').appendChild(taskItem);
+
+                // Clear the input field
+                taskInput.value = '';
+            }
+        });
+
+        // Enable drag-and-drop
+        const taskList = document.getElementById('taskList');
+        taskList.addEventListener('dragstart', (e) => {
+            e.target.classList.add('dragging');
+        });
+
+        taskList.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+        });
+
+        taskList.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Allow dropping
+            const draggingItem = document.querySelector('.dragging');
+            const siblings = [...taskList.querySelectorAll('li:not(.dragging)')];
+            const closestSibling = siblings.reduce((closest, sibling) => {
+                const box = sibling.getBoundingClientRect();
+                const offset = e.clientY - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset, element: sibling };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+
+            if (closestSibling) {
+                taskList.insertBefore(draggingItem, closestSibling);
+            } else {
+                taskList.appendChild(draggingItem);
+            }
+        });
+    </script>
+</body>
+</html>

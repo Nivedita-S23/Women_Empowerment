@@ -1,0 +1,81 @@
+body{
+    margin:0px;
+    padding:0px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(rgba(255, 105, 180, 0.5), rgba(255, 105, 180, 0)), url("women23.png");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+h1{
+    color:white;
+    
+}
+
+.container {
+    margin:12px auto;
+    margin-bottom: 12px;
+    padding:20px;
+    max-width: 500px;
+    border-radius: 15px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    align-items: center;
+}
+.container2{
+    margin:2px auto;
+    max-width: 40%;
+    max-height: 25%;
+    border-radius: 12 px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.txtarea{
+    padding:2%;
+    width: 80%;
+    padding-right: 10%;
+    padding-bottom: 50%;
+    margin:0px;
+    margin-bottom: 2%;
+    margin-top:0px;
+    border-radius: 12px;
+}
+button{
+    padding:7px;
+    margin:3px;
+}
+input{
+    padding:9px;
+    margin:8px;
+    border-radius: 5px;
+    width: 35%;
+    border:none;
+}
+.fullcontainer{
+    
+    align-items: start;
+    padding:15px;
+}
+h1{
+    text-align:center;
+}
+button{
+    border:none;
+    padding:8px;
+    border-radius: 5px;
+    background-color: rgb(105, 22, 50);
+    color:white;
+    font-size: medium;
+}
+a{
+    text-decoration: none;
+    color: rgb(105, 22, 50);
+    font-size: larger;
+    align-self: center;
+    margin-left:6px;
+}
